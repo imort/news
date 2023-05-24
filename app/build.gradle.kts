@@ -50,9 +50,10 @@ android {
 dependencies {
     val composeBom = platform(libs.androidx.compose.bom)
 
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.lifecycle)
-    implementation(libs.androidx.activity)
+    implementation(libs.androidx.navigation)
     implementation(composeBom)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)

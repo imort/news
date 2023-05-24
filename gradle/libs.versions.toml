@@ -6,6 +6,7 @@ androidxEspresso = "3.5.1"
 androidxJunit = "1.1.5"
 androidxKtx = "1.10.1"
 androidxLifecycle = "2.6.1"
+androidxNavigation = "2.5.3"
 junit = "4.13.2"
 kotlinAndroidGradlePlugin = "1.8.21"
 kotlinComposeCompilerExtension = "1.4.7"
@@ -23,6 +24,7 @@ androidx-espresso = { group = "androidx.test.espresso", name = "espresso-core", 
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxKtx" }
 androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 [plugins]
