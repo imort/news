@@ -11,15 +11,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.github.imort.news.data.Source
 
 @Composable
 internal fun AppNavHost(
+    source: Source,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
     NavHost(navController = navController, startDestination = "news", modifier = modifier) {
         composable("news") {
             NewsScreen(
+                source = source,
                 onButtonClick = { navController.navigate("news/sample") }
             )
         }
@@ -37,10 +40,14 @@ internal fun AppNavHost(
 }
 
 @Composable
-fun NewsScreen(modifier: Modifier = Modifier, onButtonClick: () -> Unit) {
+fun NewsScreen(
+    source: Source,
+    modifier: Modifier = Modifier,
+    onButtonClick: () -> Unit,
+) {
     Column(modifier = modifier) {
         Text(
-            text = "Hello News!",
+            text = "News from ${source.country}!",
         )
         Button(onClick = onButtonClick) {
             Text(text = "Go")

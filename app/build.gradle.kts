@@ -2,7 +2,13 @@
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -24,15 +30,31 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    flavorDimensions += "source"
+    productFlavors {
+        create("us") {
+            dimension = "source"
+            applicationIdSuffix = ".us"
+            versionNameSuffix = "-us"
+        }
+        create("pt") {
+            dimension = "source"
+            applicationIdSuffix = ".pt"
+            versionNameSuffix = "-pt"
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -67,4 +89,11 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso)
     androidTestImplementation(composeBom)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+    testImplementation(libs.hilt.testing)
+    kaptTest(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.testing)
+    kaptAndroidTest(libs.hilt.compiler)
 }
