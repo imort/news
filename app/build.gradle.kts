@@ -96,4 +96,10 @@ dependencies {
     kaptTest(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.testing)
     kaptAndroidTest(libs.hilt.compiler)
+
+    implementation(libs.moshi.adapters)
+    kapt(libs.moshi.codegen)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.moshi)
 }

@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "8.0.1"
+androidGradlePlugin = "8.0.2"
 androidxActivity = "1.7.1"
 androidxCompose = "2023.05.01"
 androidxEspresso = "3.5.1"
@@ -11,6 +11,8 @@ hilt = "2.46.1"
 junit = "4.13.2"
 kotlinAndroidGradlePlugin = "1.8.21"
 kotlinComposeCompilerExtension = "1.4.7"
+moshi = "1.14.0"
+retrofit = "2.9.0"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
@@ -30,6 +32,10 @@ hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
+moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
