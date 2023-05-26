@@ -8,6 +8,7 @@ androidxKtx = "1.10.1"
 androidxLifecycle = "2.6.1"
 androidxNavigation = "2.5.3"
 hilt = "2.46.1"
+hiltNavigationCompose = "1.0.0"
 junit = "4.13.2"
 kotlinAndroidGradlePlugin = "1.8.21"
 kotlinComposeCompilerExtension = "1.4.7"
@@ -30,6 +31,7 @@ androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-k
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
