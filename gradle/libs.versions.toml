@@ -7,6 +7,7 @@ androidxJunit = "1.1.5"
 androidxKtx = "1.10.1"
 androidxLifecycle = "2.6.1"
 androidxNavigation = "2.5.3"
+coil = "2.4.0"
 hilt = "2.46.1"
 hiltNavigationCompose = "1.0.0"
 junit = "4.13.2"
@@ -29,6 +30,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "a
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxKtx" }
 androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }

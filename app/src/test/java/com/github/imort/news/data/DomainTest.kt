@@ -2,7 +2,6 @@ package com.github.imort.news.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.Date
 
 class DomainTest {
     @Test
@@ -13,6 +12,7 @@ class DomainTest {
                 "totalResults": 35,
                 "articles": [
                     {
+                        "id" : "preview",
                         "source": {
                             "id": "polygon",
                             "name": "Polygon"
@@ -28,18 +28,6 @@ class DomainTest {
                 ]
             }
         """.trimIndent()
-        val topHeadlines = TopHeadlines(
-            status = Status.OK,
-            articles = listOf(
-                Article(
-                    author = "Michael McWhertor",
-                    title = "Zelda: Tears of the Kingdom duplication glitch patched out by Nintendo - Polygon",
-                    description = "A new patch for The Legend of Zelda: Tears of Kingdom (version 1.1.2) removes the easy duplication glitches for the Nintendo Switch game.",
-                    urlToImage = "https://cdn.vox-cdn.com/thumbor/sEbIZdRAR4LwupSgsyMqcc_DtPw=/0x0:1920x1005/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/24678066/totk_return_to_hyrule_alt.jpg",
-                    publishedAt = Date(1685109395000),
-                )
-            )
-        )
 
         val moshi = DataModule.moshi()
         val adapter = moshi.adapter(TopHeadlines::class.java)

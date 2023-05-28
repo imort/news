@@ -2,17 +2,19 @@ package com.github.imort.news.data
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.migration.DisableInstallInCheck
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.Date
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [DataModule.Bindings::class])
 @InstallIn(SingletonComponent::class)
 internal object DataModule {
     @Provides
@@ -21,10 +23,6 @@ internal object DataModule {
         Moshi.Builder()
             .add(Date::class.java, Rfc3339DateJsonAdapter())
             .build()
-
-    @Provides
-    fun endpoint(): Endpoint =
-        NewsEndpoint
 
     @Provides
     @Singleton
@@ -54,4 +52,16 @@ internal object DataModule {
     @Singleton
     fun newsService(retrofit: Retrofit): NewsService =
         retrofit.create(NewsService::class.java)
+
+    @Module
+    @DisableInstallInCheck
+    interface Bindings {
+        @Binds
+        @Singleton
+        fun endpoint(endpoint: NewsEndpoint): Endpoint
+
+        @Binds
+        @Singleton
+        fun storage(storage: NewsStorageImpl): NewsStorage
+    }
 }

@@ -19,9 +19,7 @@ internal fun AppNavHost(
 ) {
     NavHost(navController = navController, startDestination = "news", modifier = modifier) {
         composable("news") {
-            NewsScreen(
-                onButtonClick = { navController.navigateToArticle("id") }
-            )
+            NewsScreen(navController)
         }
         composable(
             route = "news/{id}",
