@@ -1,5 +1,6 @@
 package com.github.imort.news.data
 
+import com.github.imort.news.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import dagger.Binds
@@ -9,6 +10,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.migration.DisableInstallInCheck
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.Date
@@ -29,6 +31,7 @@ internal object DataModule {
     fun okHttpClient(endpoint: Endpoint): OkHttpClient =
         OkHttpClient.Builder()
             .addAuthInterceptor(endpoint.apiKey)
+            .maybeAddLoggingInterceptor()
             .build()
 
     private fun OkHttpClient.Builder.addAuthInterceptor(apiKey: String): OkHttpClient.Builder =
@@ -38,6 +41,15 @@ internal object DataModule {
                 .build()
             chain.proceed(modifiedRequest)
         }
+
+    private fun OkHttpClient.Builder.maybeAddLoggingInterceptor(): OkHttpClient.Builder = apply {
+        if (BuildConfig.DEBUG) {
+            val logging = HttpLoggingInterceptor().apply {
+                setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            }
+            addInterceptor(logging)
+        }
+    }
 
     @Provides
     @Singleton

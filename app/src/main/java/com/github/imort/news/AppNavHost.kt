@@ -18,7 +18,7 @@ internal fun AppNavHost(
     navController: NavHostController = rememberNavController(),
 ) {
     NavHost(navController = navController, startDestination = "news", modifier = modifier) {
-        composable("news") {
+        composable(route = "news") {
             NewsScreen(navController)
         }
         composable(
@@ -27,9 +27,10 @@ internal fun AppNavHost(
                 navArgument("id") { type = NavType.StringType },
             ),
         ) {
-            ArticleScreen()
+            ArticleScreen(navController)
         }
     }
 }
 
+fun NavController.navigateToHome() = navigate("news")
 fun NavController.navigateToArticle(id: String) = navigate("news/$id")

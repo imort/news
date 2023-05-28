@@ -16,21 +16,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.github.imort.news.data.Article
 import com.github.imort.news.navigateToArticle
+import com.github.imort.news.ui.ArticleImage
 import com.github.imort.news.ui.Error
 import com.github.imort.news.ui.MviEffectCollector
 import com.github.imort.news.ui.NewsAppTopBar
 import com.github.imort.news.ui.Progress
+import com.github.imort.news.ui.news.NewsContract.Effect
+import com.github.imort.news.ui.news.NewsContract.Event
+import com.github.imort.news.ui.news.NewsContract.State
 import com.github.imort.news.ui.theme.NewsTheme
 import kotlinx.coroutines.flow.Flow
 
@@ -46,7 +46,7 @@ fun NewsScreen(
         onEvent = viewModel::emit,
         onEffect = {
             when (it) {
-                is NewsContract.Effect.Select -> navController.navigateToArticle(it.article.id)
+                is Effect.Select -> navController.navigateToArticle(it.article.id)
             }
         },
         modifier = modifier,
@@ -55,10 +55,10 @@ fun NewsScreen(
 
 @Composable
 internal fun News(
-    state: NewsContract.State,
-    effects: Flow<NewsContract.Effect>,
-    onEvent: (NewsContract.Event) -> Unit,
-    onEffect: (NewsContract.Effect) -> Unit,
+    state: State,
+    effects: Flow<Effect>,
+    onEvent: (Event) -> Unit,
+    onEffect: (Effect) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     MviEffectCollector(flow = effects, handler = onEffect)
@@ -69,12 +69,9 @@ internal fun News(
         val mod = Modifier.padding(paddingValues)
         when {
             state.loading -> Progress(mod)
-            state.error -> Error(mod) {
-                onEvent(NewsContract.Event.Retry)
-            }
-
+            state.error -> Error(mod, "retry") { onEvent(Event.Retry) }
             else -> ArticleGrid(state.articles, mod) {
-                onEvent(NewsContract.Event.Select(it))
+                onEvent(Event.Select(it))
             }
         }
     }
@@ -102,15 +99,7 @@ fun ArticleItem(article: Article, modifier: Modifier = Modifier, onClick: () -> 
             .padding(end = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(article.urlToImage)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(120.dp),
-        )
+        ArticleImage(article.urlToImage, 120.dp)
         Spacer(modifier = Modifier.size(16.dp))
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(

@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Error(
     modifier: Modifier = Modifier,
+    buttonText: String,
     onButtonClick: () -> Unit,
 ) {
     Column(
@@ -41,9 +42,7 @@ fun Error(
         )
         Spacer(modifier = Modifier.size(16.dp))
         Button(onClick = { onButtonClick() }) {
-            Text(
-                text = "RETRY"
-            )
+            Text(text = buttonText.uppercase())
         }
     }
 }
@@ -51,5 +50,5 @@ fun Error(
 @Preview(showBackground = true)
 @Composable
 fun NetworkErrorPreview() {
-    Error(modifier = Modifier, onButtonClick = {})
+    Error(modifier = Modifier, buttonText = "button", onButtonClick = {})
 }

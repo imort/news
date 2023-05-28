@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
     kotlin("kapt")
 }
 
@@ -57,6 +58,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -102,6 +104,8 @@ dependencies {
 
     implementation(libs.moshi.adapters)
     kapt(libs.moshi.codegen)
+
+    implementation(libs.okhttp.logging)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
