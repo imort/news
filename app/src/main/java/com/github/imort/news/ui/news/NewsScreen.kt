@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -85,7 +86,12 @@ fun ArticleGrid(
 ) {
     LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 400.dp), modifier = modifier) {
         items(items = articles, key = { it.id }) { article ->
-            ArticleItem(article) { onArticleClick(article) }
+            ArticleItem(
+                article = article,
+                modifier = Modifier.testTag("article-${article.id}"),
+            ) {
+                onArticleClick(article)
+            }
         }
     }
 }

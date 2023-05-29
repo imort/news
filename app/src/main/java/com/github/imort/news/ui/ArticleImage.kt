@@ -10,7 +10,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @Composable
-fun ArticleImage(url: String?, size: Dp) {
+fun ArticleImage(url: String?, size: Dp, modifier: Modifier = Modifier) {
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(url)
@@ -18,6 +18,6 @@ fun ArticleImage(url: String?, size: Dp) {
             .build(),
         contentDescription = null,
         contentScale = ContentScale.Crop,
-        modifier = Modifier.size(size),
+        modifier = modifier.size(size),
     )
 }
