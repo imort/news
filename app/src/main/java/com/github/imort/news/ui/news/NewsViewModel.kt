@@ -33,7 +33,9 @@ class NewsViewModel @Inject constructor(
             update { copy(loading = true) }
             repo.headlines(source.country)
                 .map { headlines ->
-                    headlines.copy(articles = headlines.articles.sortedBy(Article::publishedAt))
+                    headlines.copy(
+                        articles = headlines.articles.sortedByDescending(Article::publishedAt),
+                    )
                 }
                 .onSuccess {
                     update { copy(loading = false, articles = it.articles) }
