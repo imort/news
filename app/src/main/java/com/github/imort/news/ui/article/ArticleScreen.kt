@@ -1,14 +1,13 @@
 package com.github.imort.news.ui.article
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -96,10 +95,7 @@ private fun ArticleContent(article: Article, modifier: Modifier = Modifier) {
 @Composable
 private fun ArticlePortrait(article: Article, minDimension: Dp, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.scrollable(
-            state = rememberScrollableState { it },
-            orientation = Orientation.Vertical,
-        ),
+        modifier = modifier.verticalScroll(rememberScrollState()),
     ) {
         ArticleImage(article.urlToImage, minDimension, Modifier.testTag("image"))
         ArticleBody(article)
@@ -111,10 +107,7 @@ private fun ArticleLandscape(article: Article, minDimension: Dp, modifier: Modif
     Row(modifier = modifier) {
         ArticleImage(article.urlToImage, minDimension, Modifier.testTag("image"))
         Column(
-            modifier = modifier.scrollable(
-                state = rememberScrollableState { it },
-                orientation = Orientation.Vertical,
-            )
+            modifier = modifier.verticalScroll(rememberScrollState())
         ) {
             ArticleBody(article)
         }
@@ -128,7 +121,9 @@ private fun ArticleBody(article: Article) {
         Text(
             text = it,
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(horizontal = 16.dp).testTag("title"),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .testTag("title"),
         )
         Spacer(modifier = Modifier.size(8.dp))
     }
@@ -136,7 +131,9 @@ private fun ArticleBody(article: Article) {
         Text(
             text = it,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(horizontal = 16.dp).testTag("description"),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .testTag("description"),
         )
         Spacer(modifier = Modifier.size(8.dp))
     }
@@ -144,7 +141,9 @@ private fun ArticleBody(article: Article) {
         Text(
             text = it,
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(horizontal = 16.dp).testTag("content"),
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .testTag("content"),
         )
         Spacer(modifier = Modifier.size(8.dp))
     }
