@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.github.imort.news.data.BiometricHelper
 import com.github.imort.news.ui.MviEffectCollector
 import com.github.imort.news.ui.main.MainContract.Effect
 import com.github.imort.news.ui.main.MainContract.Event
@@ -18,38 +19,44 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun MainScreen(
+    biometricHelper: BiometricHelper,
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = hiltViewModel(),
 ) {
+    val activity = LocalContext.current as FragmentActivity
     Main(
         state = viewModel.viewState.value,
         effects = viewModel.effects,
         onEvent = viewModel::emit,
         onEffect = {},
+        onShowBiometricPrompt = {
+            biometricHelper.showPrompt(activity) {
+                viewModel.emit(Event.BiometricSuccess)
+            }
+        },
         modifier = modifier,
     )
 }
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 private fun Main(
     state: State,
     effects: Flow<Effect>,
     onEvent: (Event) -> Unit,
     onEffect: (Effect) -> Unit,
+    onShowBiometricPrompt: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     MviEffectCollector(flow = effects, handler = onEffect)
 
     val biometric = state.biometric
-    val activity = LocalContext.current as FragmentActivity
     LaunchedEffect(biometric) {
-        if (biometric) {
-            onEvent(Event.ShowPrompt(activity))
-        }
+        if (biometric) onShowBiometricPrompt()
     }
     if (biometric) {
         Lock(modifier = modifier) {
-            onEvent(Event.ShowPrompt(activity))
+            onShowBiometricPrompt()
         }
     } else {
         MainNavHost(modifier = modifier)
