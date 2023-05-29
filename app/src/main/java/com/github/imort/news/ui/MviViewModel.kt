@@ -16,12 +16,11 @@ interface MviState
 
 interface MviEffect
 
-abstract class MviViewModel<Ev : MviEvent, S : MviState, Ef : MviEffect> : ViewModel() {
-    abstract fun initialState(): S
+abstract class MviViewModel<Ev : MviEvent, S : MviState, Ef : MviEffect>(
+    initialState: S,
+) : ViewModel() {
 
     protected open fun handle(event: Ev) = Unit
-
-    private val initialState: S by lazy { initialState() }
 
     private val _viewState: MutableState<S> = mutableStateOf(initialState)
     val viewState: State<S> = _viewState

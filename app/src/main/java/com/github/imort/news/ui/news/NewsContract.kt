@@ -14,10 +14,10 @@ interface NewsContract {
 
     @Immutable
     data class State(
-        val country: String,
-        val loading: Boolean,
-        val articles: List<Article>,
-        val error: Boolean,
+        val country: String = "",
+        val loading: Boolean = false,
+        val articles: List<Article> = emptyList(),
+        val error: Boolean = false,
     ) : MviState
 
     sealed class Effect : MviEffect {

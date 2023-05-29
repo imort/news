@@ -75,6 +75,7 @@ dependencies {
     val composeBom = platform(libs.androidx.compose.bom)
 
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.biometric)
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.navigation)

@@ -5,7 +5,9 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.fragment.app.FragmentActivity
 import com.github.imort.news.data.Article
+import com.github.imort.news.data.BiometricHelper
 import com.github.imort.news.data.DataModule
 import com.github.imort.news.data.NewsService
 import com.github.imort.news.data.NewsStorage
@@ -45,6 +47,13 @@ class HiltComposeInstrumentedTest {
     @BindValue
     @JvmField
     val storage: NewsStorage = NewsStorageImpl()
+
+    @BindValue
+    @JvmField
+    val biometric: BiometricHelper = object : BiometricHelper {
+        override fun available() = false
+        override fun showPrompt(activity: FragmentActivity, onSuccess: () -> Unit) = Unit
+    }
 
     @Test
     fun loadAndOpensArticle() {

@@ -23,12 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.imort.news.data.Article
-import com.github.imort.news.navigateToArticle
 import com.github.imort.news.ui.ArticleImage
 import com.github.imort.news.ui.Error
 import com.github.imort.news.ui.MviEffectCollector
 import com.github.imort.news.ui.NewsAppTopBar
 import com.github.imort.news.ui.Progress
+import com.github.imort.news.ui.main.navigateToArticle
 import com.github.imort.news.ui.news.NewsContract.Effect
 import com.github.imort.news.ui.news.NewsContract.Event
 import com.github.imort.news.ui.news.NewsContract.State
@@ -55,7 +55,7 @@ fun NewsScreen(
 }
 
 @Composable
-internal fun News(
+private fun News(
     state: State,
     effects: Flow<Effect>,
     onEvent: (Event) -> Unit,
@@ -79,7 +79,7 @@ internal fun News(
 }
 
 @Composable
-fun ArticleGrid(
+private fun ArticleGrid(
     articles: List<Article>,
     modifier: Modifier = Modifier,
     onArticleClick: (Article) -> Unit,
@@ -97,7 +97,7 @@ fun ArticleGrid(
 }
 
 @Composable
-fun ArticleItem(article: Article, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+private fun ArticleItem(article: Article, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -127,7 +127,7 @@ fun ArticleItem(article: Article, modifier: Modifier = Modifier, onClick: () -> 
 
 @Preview(showBackground = true)
 @Composable
-fun ArticleItemPreview() {
+private fun ArticleItemPreview() {
     NewsTheme {
         ArticleItem(article = Article.preview)
     }

@@ -1,4 +1,4 @@
-package com.github.imort.news
+package com.github.imort.news.ui.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +13,7 @@ import com.github.imort.news.ui.article.ArticleScreen
 import com.github.imort.news.ui.news.NewsScreen
 
 @Composable
-internal fun AppNavHost(
+internal fun MainNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {

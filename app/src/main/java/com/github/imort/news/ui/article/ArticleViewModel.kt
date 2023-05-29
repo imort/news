@@ -14,11 +14,9 @@ import javax.inject.Inject
 class ArticleViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val storage: NewsStorage,
-) : MviViewModel<Event, State, Effect>() {
+) : MviViewModel<Event, State, Effect>(State()) {
     private val id: String = savedStateHandle["id"] ?: error("Missing id")
     private val stateId = "state-article-$id"
-
-    override fun initialState() = State()
 
     init {
         load(id)

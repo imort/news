@@ -75,5 +75,9 @@ internal object DataModule {
         @Binds
         @Singleton
         fun storage(storage: NewsStorageImpl): NewsStorage
+
+        @Binds
+        @Singleton
+        fun biometric(biometric: BiometricHelperImpl): BiometricHelper
     }
 }

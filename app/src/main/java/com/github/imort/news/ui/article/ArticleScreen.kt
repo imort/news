@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.imort.news.data.Article
-import com.github.imort.news.navigateToHome
 import com.github.imort.news.ui.ArticleImage
 import com.github.imort.news.ui.Error
 import com.github.imort.news.ui.MviEffectCollector
@@ -30,6 +29,7 @@ import com.github.imort.news.ui.NewsAppTopBar
 import com.github.imort.news.ui.article.ArticleContract.Effect
 import com.github.imort.news.ui.article.ArticleContract.Event
 import com.github.imort.news.ui.article.ArticleContract.State
+import com.github.imort.news.ui.main.navigateToHome
 import kotlinx.coroutines.flow.Flow
 
 @Composable

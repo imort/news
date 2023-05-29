@@ -16,19 +16,12 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(
     private val source: Source,
     private val repo: NewsRepository,
-) : MviViewModel<Event, State, Effect>() {
+) : MviViewModel<Event, State, Effect>(State()) {
 
     init {
         update { copy(country = source.country) }
         load()
     }
-
-    override fun initialState() = State(
-        country = "",
-        loading = true,
-        articles = emptyList(),
-        error = false,
-    )
 
     override fun handle(event: Event) = when (event) {
         is Event.Retry -> load()
